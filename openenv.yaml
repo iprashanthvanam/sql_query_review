@@ -1,0 +1,33 @@
+name: sql_query_review
+version: "1.0.0"
+description: >
+  A real-world SQL query review environment where an AI agent identifies
+  performance issues, security flaws, and logic bugs in SQL queries,
+  assesses severity, and proposes fixes. Three tasks of increasing difficulty.
+tags:
+  - openenv
+  - sql
+  - code-review
+  - real-world
+entry_point: server/app.py
+port: 7860
+tasks:
+  - name: easy
+    description: Simple SELECT query with column over-selection and loose string match
+    difficulty: easy
+  - name: medium
+    description: Reporting query with implicit join syntax and GROUP BY bug
+    difficulty: medium
+  - name: hard
+    description: Analytical query with N+1 correlated subqueries and missing index hints
+    difficulty: hard
+env_vars:
+  SQL_REVIEW_TASK:
+    default: easy
+    description: Which task to run (easy | medium | hard)
+  WORKERS:
+    default: "2"
+    description: Uvicorn worker processes
+  PORT:
+    default: "7860"
+    description: Server port
